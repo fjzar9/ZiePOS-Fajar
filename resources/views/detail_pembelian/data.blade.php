@@ -18,7 +18,7 @@
                 <td>{{ $dp->pembelian->tanggal_masuk->translatedFormat('d F Y') }}</td>
                 <td>{{ $dp->barang->kode_barang }}</td>
                 <td>{{ $dp->barang->nama_barang }}</td>
-                <td>@currency($dp->harga_beli)</td>
+                <td>@currency($dp->sub_total)</td>
                 <td>{{ $dp->jumlah }} {{ $dp->barang->satuan->jenis_satuan }}</td>
                 <td>@currency($dp->sub_total)</td>
             </tr>
