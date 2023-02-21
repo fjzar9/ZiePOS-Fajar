@@ -26,18 +26,6 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-// Route::get('/login', function () {
-//     return view('login.index', [
-//         "title" => "Login"
-//     ]);
-// });
-
-// Route::get('/login2', function () {
-//     return view('login.demo2', [
-//         "title" => "Login"
-//     ]);
-// });
-
 Route::get('/', function () {
     return view('home.index', [
         "title" => "Dashboard"
