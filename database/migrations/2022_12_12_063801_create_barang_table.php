@@ -14,17 +14,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('barang', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('username', 50);
-            $table->string('email')->unique();
-            $table->string('alamat', 200)->nullable();
-            $table->string('no_telp', 20)->nullable();
-            $table->enum('jenis_kelamin', ['Pria', 'Wanita'])->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('kode_barang', 50);
+            $table->unsignedInteger('produk_id');
+            $table->string('nama_barang', 100);
+            $table->string('satuan_id');
+            $table->double('harga_jual');
+            $table->string('stok', 5);
+            $table->integer('ditarik');
+            $table->unsignedInteger('user_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('barang');
     }
 };

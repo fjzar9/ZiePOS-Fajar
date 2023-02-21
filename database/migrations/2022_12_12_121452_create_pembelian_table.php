@@ -14,17 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pembelian', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('username', 50);
-            $table->string('email')->unique();
-            $table->string('alamat', 200)->nullable();
-            $table->string('no_telp', 20)->nullable();
-            $table->enum('jenis_kelamin', ['Pria', 'Wanita'])->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('kode_masuk', 50);
+            $table->date('tanggal_masuk');
+            $table->double('total');
+            $table->unsignedInteger('pemasok_id');
+            $table->unsignedInteger('user_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
@@ -37,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pembelian');
     }
 };
