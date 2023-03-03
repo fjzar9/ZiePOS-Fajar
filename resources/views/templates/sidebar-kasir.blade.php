@@ -3,7 +3,7 @@
       <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
           <div class="logo">
-            <a href="{{ url('/') }}">
+            <a href="{{ url('home') }}">
               <img src="{{ asset('assets') }}/images/logo/logo2.svg" alt="Logo" srcset=""/>
             </a>
           </div>
@@ -83,41 +83,6 @@
             </a>
           </li>
 
-          <li class="sidebar-item {{ request()->is('*produk*') ? 'active' : '' }}">
-            <a href="{{ url('produk') }}" class="sidebar-link">
-              <i class="fa-solid fa-boxes-stacked"></i>
-              <span>Produk</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item {{ request()->is('*satuan*') ? 'active' : '' }}">
-            <a href="{{ url('satuan') }}" class="sidebar-link">
-              <i class="fa-solid fa-weight-hanging"></i>
-              <span>Satuan</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item {{ request()->is('*barang*') ? 'active' : '' }}">
-            <a href="{{ url('barang') }}" class="sidebar-link">
-              <i class="fa-solid fa-box-open"></i>
-              <span>Barang</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item {{ request()->is('*bank*') ? 'active' : '' }}">
-            <a href="{{ url('bank') }}" class="sidebar-link">
-              <i class="fa-solid fa-money-bill"></i>
-              <span>Bank</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item {{ request()->is('*pemasok*') ? 'active' : '' }}">
-            <a href="{{ url('pemasok') }}" class="sidebar-link">
-              <i class="fa-solid fa-truck"></i>
-              <span>Pemasok</span>
-            </a>
-          </li>
-
           <li class="sidebar-item {{ request()->is('*pelanggan*') ? 'active' : '' }}">
             <a href="{{ url('pelanggan') }}" class="sidebar-link">
               <i class="fa-solid fa-users"></i>
@@ -155,22 +120,6 @@
                 <a href="{{ url('dataPenjualan') }}">Detail Penjualan</a>
               </li>
             </ul>
-          </li>
-
-          <li class="sidebar-title">Laporan</li>
-
-          <li class="sidebar-item {{ request()->is('*LaporanPembelian*') ? 'active' : '' }}">
-            <a href="{{ url('LaporanPembelian') }}" class="sidebar-link">
-              <i class="fa-solid fa-file"></i>
-              <span>Laporan Pembelian</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item {{ request()->is('*LaporanPenjualan*') ? 'active' : '' }}">
-            <a href="{{ url('LaporanPenjualan') }}" class="sidebar-link">
-              <i class="fa-solid fa-file"></i>
-              <span>Laporan Penjualan</span>
-            </a>
           </li>
 
           <li class="sidebar-title">Authentication</li>

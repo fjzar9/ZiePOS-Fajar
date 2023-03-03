@@ -5,6 +5,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PembelianController;
@@ -26,13 +27,29 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('home.index', [
-        "title" => "Dashboard"
-    ]);
-})->middleware('auth');
+Route::middleware(['auth'])->group(function() {
 
-Route::middleware(['auth'])->group(function () {
+    Route::get('home', [DashboardController::class, 'index']);
+
+    Route::get('profile', [ProfileController::class, 'index']);
+
+    Route::post('logout', [LoginController::class, 'logout']);
+
+});
+
+Route::middleware(['guest'])->group(function() {
+
+    Route::get('login', [LoginController::class, 'index'])->name('login');
+
+    Route::post('login', [LoginController::class, 'authenticate']);
+    
+    Route::get('register', [RegisterController::class, 'index']);
+    
+    Route::post('register', [RegisterController::class, 'store']);
+
+});
+
+Route::middleware(['auth', 'role:Owner'])->group(function() {
 
     Route::resource('produk', ProdukController::class);
 
@@ -66,16 +83,50 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('LaporanPenjualan', DetailPenjualanController::class);
 
-    Route::get('profile', [ProfileController::class, 'index']);
-
-    Route::post('logout', [LoginController::class, 'logout']);
 });
 
+Route::middleware(['auth', 'role:Admin'])->group(function() {
 
-Route::get('login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+    Route::resource('produk', ProdukController::class);
 
-Route::post('login', [LoginController::class, 'authenticate']);
+    Route::resource('satuan', SatuanController::class);
+    
+    Route::resource('barang', BarangController::class);
+    
+    Route::resource('bank', BankController::class);
+    
+    Route::resource('pemasok', PemasokController::class);
+    
+    Route::resource('pelanggan', PelangganController::class);
+    
+    Route::resource('pembelian', PembelianController::class);
+    
+    Route::get('dataPembelian',[PembelianController::class, 'dataPembelian']);
+    
+    Route::get('printPembelian/{id}',[PembelianController::class, 'printPembelian']);
+    
+    Route::resource('penjualan', PenjualanController::class);
+    
+    Route::get('dataPenjualan',[PenjualanController::class, 'dataPenjualan']);
+    
+    Route::get('printPenjualan/{id}',[PenjualanController::class, 'printPenjualan']);
 
-Route::get('register', [RegisterController::class, 'index'])->middleware('guest');
+});
 
-Route::post('register', [RegisterController::class, 'store']);
+Route::middleware(['auth', 'role:Kasir'])->group(function() {
+
+    Route::resource('pelanggan', PelangganController::class);
+    
+    Route::resource('pembelian', PembelianController::class);
+    
+    Route::get('dataPembelian',[PembelianController::class, 'dataPembelian']);
+    
+    Route::get('printPembelian/{id}',[PembelianController::class, 'printPembelian']);
+    
+    Route::resource('penjualan', PenjualanController::class);
+    
+    Route::get('dataPenjualan',[PenjualanController::class, 'dataPenjualan']);
+    
+    Route::get('printPenjualan/{id}',[PenjualanController::class, 'printPenjualan']);
+
+});

@@ -3,7 +3,7 @@
       <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
           <div class="logo">
-            <a href="{{ url('/') }}">
+            <a href="{{ url('home') }}">
               <img src="{{ asset('assets') }}/images/logo/logo2.svg" alt="Logo" srcset=""/>
             </a>
           </div>

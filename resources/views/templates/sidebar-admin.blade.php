@@ -3,7 +3,7 @@
       <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
           <div class="logo">
-            <a href="{{ url('/') }}">
+            <a href="{{ url('home') }}">
               <img src="{{ asset('assets') }}/images/logo/logo2.svg" alt="Logo" srcset=""/>
             </a>
           </div>
@@ -155,22 +155,6 @@
                 <a href="{{ url('dataPenjualan') }}">Detail Penjualan</a>
               </li>
             </ul>
-          </li>
-
-          <li class="sidebar-title">Laporan</li>
-
-          <li class="sidebar-item {{ request()->is('*LaporanPembelian*') ? 'active' : '' }}">
-            <a href="{{ url('LaporanPembelian') }}" class="sidebar-link">
-              <i class="fa-solid fa-file"></i>
-              <span>Laporan Pembelian</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item {{ request()->is('*LaporanPenjualan*') ? 'active' : '' }}">
-            <a href="{{ url('LaporanPenjualan') }}" class="sidebar-link">
-              <i class="fa-solid fa-file"></i>
-              <span>Laporan Penjualan</span>
-            </a>
           </li>
 
           <li class="sidebar-title">Authentication</li>

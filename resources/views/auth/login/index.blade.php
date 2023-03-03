@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ $title }} - ZIEPOS</title>
-    <link rel="stylesheet" href="{{ asset('assets') }}/css/main/app.css"/>
-    <link rel="stylesheet" href="{{ asset('assets') }}/css/pages/auth.css"/>
-    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logo/favicon.svg" type="image/x-icon"/>
-    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logo/favicon.png" type="image/png"/>
-  </head>
+  @include('templates.header')
+  <link rel="stylesheet" href="{{ asset('assets') }}/css/pages/auth.css"/>
 
   <body>
     <div id="auth">
@@ -16,32 +9,19 @@
         <div class="col-lg-5 col-12">
           <div id="auth-left">
             <div class="auth-logo">
-              <a href="{{ url('/') }}">
                 <img src="{{ asset('assets') }}/images/logo/logo2.svg" alt="Logo"/>
-              </a>
             </div>
             <h1 class="auth-title mb-5">Log in.</h1>
-            {{-- <p class="auth-subtitle mb-5">
-              Log in with your data that you entered during registration.
-            </p> --}}
-
-            <form action="login" method="POST">
+            <form action="login" method="POST" data-parsley-validate>
               @csrf
-
               <div class="form-group position-relative has-icon-left mb-4">
-                <input type="text" class="form-control form-control-xl" placeholder="Username" name="username" id="username" required value="{{ old('username') }}"/>
+                <input type="text" class="form-control form-control-xl" placeholder="Username" name="username" id="username" data-parsley-required="true" data-parsley-required-message="Username harus diisi!" value="{{ old('username') }}"/>
                 <div class="form-control-icon">
                   <i class="bi bi-person"></i>
                 </div>
-                @error('username')
-                  <div class="invalid-feedback">
-                    <i class="bx bx-radio-circle"></i>
-                    {{ $message }}
-                  </div>
-                @enderror
               </div>
               <div class="form-group position-relative has-icon-left mb-4">
-                <input type="password" class="form-control form-control-xl" placeholder="Password" name="password" id="password" required/>
+                <input type="password" class="form-control form-control-xl" placeholder="Password" name="password" id="password" data-parsley-required="true" data-parsley-required-message="Username harus diisi!"/>
                 <div class="form-control-icon">
                   <i class="bi bi-shield-lock"></i>
                 </div>
@@ -50,17 +30,11 @@
                 Log in
               </button>
             </form>
-            
             <div class="text-center mt-5 text-lg fs-4">
               <p class="text-gray-600">
                 Don't have an account?
                 <a href="{{ url('register') }}" class="font-bold">Sign up</a>.
               </p>
-              {{-- <p>
-                <a class="font-bold" href="{{ url('forgot-password') }}">
-                  Forgot password?
-                </a>.
-              </p> --}}
             </div>
           </div>
         </div>
@@ -69,7 +43,6 @@
         </div>
       </div>
     </div>
-    <script src="{{ asset('assets') }}/js/bootstrap.js"></script>
-    <script src="{{ asset('assets') }}/js/app.js"></script>
+    @include('templates.footer')
   </body>
 </html>

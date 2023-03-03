@@ -98,7 +98,7 @@
                 <div class="user-name text-end me-3">
                   @auth
                   <h6 class="mb-0 text-gray-600">{{ auth()->user()->name }}</h6>
-                  <p class="mb-0 text-sm text-gray-600">Admin</p>
+                  <p class="mb-0 text-sm text-gray-600">{{ auth()->user()->role }}</p>
                   @endauth
                 </div>
                 <div class="user-img d-flex align-items-center">
