@@ -11,32 +11,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table" id="dataTable1">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Kode Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Harga Barang</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($barang as $b)
-                        <tr>
-                            <td>
-                                {{ $i = (isset($i)?++$i:$i=1) }}
-                                <input type="hidden" class="idBarang" name="idBarang" value="{{ $b->id }}">
-                                <input type="hidden" class="idSatuan" name="idSatuan" value="{{ $b->satuan->jenis_satuan }}">
-                            </td>
-                            <td>{{ $b->kode_barang }}</td>
-                            <td>{{ $b->nama_barang }}</td>
-                            <td>{{ $b->harga_jual }}</td>
-                            <td><button type="button" class="btn btn-primary pilihBarangBtn"><i data-feather="plus"></i></button></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table" id="dataTable1">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Harga Barang</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($barang as $b)
+                            <tr>
+                                <td>
+                                    {{ $i = (isset($i)?++$i:$i=1) }}
+                                    <input type="hidden" class="idBarang" name="idBarang" value="{{ $b->id }}">
+                                    <input type="hidden" class="idSatuan" name="idSatuan" value="{{ $b->satuan->jenis_satuan }}">
+                                </td>
+                                <td>{{ $b->kode_barang }}</td>
+                                <td>{{ $b->nama_barang }}</td>
+                                <td>{{ $b->harga_jual }}</td>
+                                <td><button type="button" class="btn btn-primary pilihBarangBtn"><i data-feather="plus"></i></button></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -20,9 +20,6 @@
             <p class="fs-5 text-gray-600">
               The page you are looking not found.
             </p>
-            <a href="{{ url('/') }}" class="btn btn-lg btn-outline-primary mt-3">
-              Go Home
-            </a>
           </div>
         </div>
       </div>

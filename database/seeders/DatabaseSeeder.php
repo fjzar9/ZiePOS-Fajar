@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Database\Seeders\PemasokSeeder;
+use Illuminate\Foundation\Auth\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,11 +19,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::table('users')->insert([
+            'name' => 'user',
+            'username' => 'user',
+            'email' => 'test@example.com',
+            'alamat' => 'test@example.com',
+            'no_telp' => 1123,
+            'jenis_kelamin' => 'Pria',
+            'password' => bcrypt('123'),
+        ]);
 
-        $this->call(PemasokSeeder::class);
+        // $this->call(PemasokSeeder::class);
     }
 }

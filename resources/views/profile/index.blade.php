@@ -8,7 +8,6 @@
 
 <div class="card">
     <div class="card-header">
-      {{-- <h5 class="card-title">Horizontal Navs</h5> --}}
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link active" id="account-tab" data-bs-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="true">Account</a>
@@ -24,18 +23,21 @@
     <div class="card-body">
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-          <div class="d-flex align-items-start align-items-sm-center my-2">
-              <div class="">
-                  <img src="assets/images/faces/fajar.png" alt="Face 1" class="d-block" height="100" width="100">
-              </div>
-              <div class="button-wrapper ms-4">
-                  <input type="button" value="Upload New Photo" class="btn btn-primary mb-2" onclick="document.getElementById('file').click();" />
-                  <input type="file" class="d-none" id="file" name="file"/>
-                  <p class="mt-2 mb-0">Allowed PNG or JPEG. Max size of 800K.</p>
-              </div>
+            <div class="profile-pic mx-auto">
+              <label for="image">
+                <input type="file" name="image" id="image" style="display:none;"/>
+                <img src="assets/images/faces/fajar.png" alt="Face 1" class="d-block profile-image">
+                <div class="profile-content">
+                  <span class="profile-icon"><i data-feather="camera"></i></span>
+                  <span class="profile-text">Edit Profile</span>
+                </div>
+             </label>
             </div>
-        
-            <form class="form" action="register" method="POST">
+            @foreach ($user as $item)
+                
+            @endforeach
+            <form class="form" action="{{ route('profile.update', auth()->user()->id) }}" method="POST">
+              @method('patch')
                 @csrf
               <div class="row mt-4">
                 <div class="col-md-6 col-12">
@@ -77,13 +79,13 @@
                   <div class="row">
                       <div class="col-12">
                           <div class="form-check form-check-inline mb-3">
-                              <input class="form-check-input" type="radio" name="radiodefault" id="pria" @checked(Auth::user()->jenis_kelamin == "Pria")/>
+                              <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" @checked(Auth::user()->jenis_kelamin == "Pria") value="Pria"/>
                               <label class="form-check-label" for="pria">
                                 Pria
                               </label>
                           </div>
                           <div class="form-check form-check-inline mb-3">
-                              <input class="form-check-input" type="radio" name="radiodefault" id="wanita" @checked(Auth::user()->jenis_kelamin == "Wanita")/>
+                              <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" @checked(Auth::user()->jenis_kelamin == "Wanita") value="Wanita"/>
                               <label class="form-check-label" for="wanita">
                                 Wanita
                               </label>
@@ -91,14 +93,14 @@
                       </div>
                   </div>
                 </div>
-                <div class="col-12 d-flex justify-content-start">
-                  <button type="submit" class="btn btn-primary me-1 mb-1 mt-2">
-                    Simpan
-                  </button>
-                  <button type="reset" class="btn btn-light-secondary me-1 mb-1 mt-2">
-                    Reset
-                  </button>
+                <div class="col-12">
+                  <div class="d-grid gap-2 d-md-block">
+                    <button type="submit" class="btn btn-primary me-1 mb-1 mt-2">
+                      Simpan
+                    </button>
+                  </div>
                 </div>
+                
               </div>
             </form>
 
@@ -130,15 +132,33 @@
         role="tabpanel"
         aria-labelledby="security-tab"
       >
-        <p class="mt-2">
-          Duis ultrices purus non eros fermentum hendrerit.
-          Aenean ornare interdum viverra. Sed ut odio velit.
-          Aenean eu diam dictum nibh rhoncus mattis quis ac
-          risus. Vivamus eu congue ipsum. Maecenas id
-          sollicitudin ex. Cras in ex vestibulum, posuere orci
-          at, sollicitudin purus. Morbi mollis elementum enim,
-          in cursus sem placerat ut.
-        </p>
+      <form class="form" action="{{ route('editPassword') }}" method="POST">
+        @csrf
+        <div class="row mt-4">
+          <div class="col-md-6 col-12">
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password Lama" value="">
+                <label for="name">Password Lama</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Password Baru" value="">
+                <label for="name">Password Baru</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" placeholder="Konfirmasi Password" value="">
+                <label for="name">Konfirmasi Password</label>
+            </div>
+            <div class="col-12 d-flex justify-content-start">
+              <button type="submit" class="btn btn-primary me-1 mb-1 mt-2">
+                Simpan
+              </button>
+            </div>
+          </div>
+          <div class="col-md-6 col-12 d-none d-lg-block d-md-block">
+            <img class="img-fluid mx-auto d-block img-float" src="assets/images/samples/password.png" alt="Card image cap" height="250" width="250">
+          </div>
+        </div>
+      </form>
       </div>
     </div>
     </div>

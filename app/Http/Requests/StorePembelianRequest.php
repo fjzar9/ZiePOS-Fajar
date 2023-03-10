@@ -34,4 +34,18 @@ class StorePembelianRequest extends FormRequest
             'sub_total' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'kode_masuk.required' => 'Kode masuk belum diisi!',
+            'tanggal_masuk.required' => 'Tanggal masuk belum diisi!',
+            'total.required' => 'Total belum diisi!',
+            'pemasok_id.required' => 'Pemasok belum diisi!',
+            'barang_id.required' => 'Barang belum diisi!',
+            'harga_beli.required' => 'Harga beli belum diisi!',
+            'jumlah.required' => 'Jumlah belum diisi!',
+            'sub_total.required' => 'Sub total belum diisi!',
+        ];
+    }
 }

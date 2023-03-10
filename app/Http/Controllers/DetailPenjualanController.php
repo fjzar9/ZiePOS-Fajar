@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\DetailPembelian;
 use App\Models\DetailPenjualan;
+use Illuminate\Routing\Controller;
 use App\Http\Requests\StoreDetailPenjualanRequest;
 use App\Http\Requests\UpdateDetailPenjualanRequest;
 
@@ -15,16 +18,27 @@ class DetailPenjualanController extends Controller
      */
     public function index()
     {
-        $data['detail_penjualan'] = DetailPenjualan::latest()->get();
-        return view('detail_penjualan.index', [
-            "title" => "Laporan Penjualan"
-        ])->with($data);
+        if (request()->tanggal_awal || request()->tanggal_akhir) {
+            $tanggal_awal = Carbon::parse(request()->tanggal_awal)->toDateString();
+            $tanggal_akhir = Carbon::parse(request()->tanggal_akhir)->toDateString();
+            $data['detail_penjualan'] = DetailPenjualan::latest()->whereBetween('tgl_faktur',[$tanggal_awal, $tanggal_akhir])->get();
+        } else {
+            $tanggal_awal = Carbon::today()->toDateString();
+            $tanggal_akhir = Carbon::today()->toDateString();
+            $data['detail_penjualan'] = DetailPenjualan::latest()->whereBetween('tgl_faktur',[$tanggal_awal, $tanggal_akhir])->get();
+        } return view('detail_penjualan.index', [
+                "title" => "Laporan Penjualan",
+                "tanggal_awal" => $tanggal_awal,
+                "tanggal_akhir" => $tanggal_akhir
+        ])->with($data, $tanggal_awal, $tanggal_akhir);
     }
 
-    public function printLaporanPenjualan(){
-        $data['detail_penjualan'] = DetailPenjualan::get();
+    public function printLaporanPenjualan($tanggal_awal, $tanggal_akhir){
+        $data['detail_penjualan'] = DetailPenjualan::latest()->whereBetween('tgl_faktur',[$tanggal_awal, $tanggal_akhir])->get();
         return view('detail_penjualan.print', [
-            "title" => "Laporan Penjualan"
+            "title" => "Laporan Penjualan",
+            "tanggal_awal" => $tanggal_awal,
+            "tanggal_akhir" => $tanggal_akhir
         ])->with($data);
     }
 

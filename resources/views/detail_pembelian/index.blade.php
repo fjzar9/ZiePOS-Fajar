@@ -43,19 +43,24 @@
             </div>
             <div class="row mb-5">
                 <div class="col">
-                    <a href="printLaporanPembelian" class="btn icon icon-left btn-primary">
+                    <input type="hidden" id="first-name-column" class="form-control date-picker" name="tanggal_masuk" required readonly value="{{ date('Y-m-d') }}">
+                    <a href="{{ route('printLaporanPembelian', [$tanggal_awal, $tanggal_akhir]) }}" class="btn icon icon-left btn-primary">
                         <i data-feather="printer"></i> Print
                     </a>
-                    <a href="#" class="btn icon icon-left btn-primary" id="btnPdf">
-                        <i data-feather="download"></i> Download
+                    <a href="{{ route('export-pembelian', [$tanggal_awal, $tanggal_akhir]) }}" class="btn icon icon-left btn-primary">
+                        <i data-feather="download"></i> Export
                     </a>
+                    <button type="button" class="btn icon icon-left btn-primary" data-bs-toggle="modal" data-bs-target="#FormImport">
+                        <i data-feather="upload"></i> Import
+                    </button>
+                    @include('detail_pembelian.form')
                 </div>
             </div>
 
             <div class="row my-2">
                 <div class="col">
-                    <h3 class="card-title text-center">ZIEPOS</h3>
-                    <h4 class="text-center">{{ $title }}  $tanggal_awal <br>s/d $tanggal_akhir </h4>
+                    <h3 class="card-title text-center">{{ $title }}</h3>
+                    <h4 class="text-center">{{ $tanggal_awal }} s/d {{ $tanggal_akhir }}</h4>
                 </div>
             </div>
 

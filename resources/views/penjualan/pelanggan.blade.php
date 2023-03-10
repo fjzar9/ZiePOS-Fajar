@@ -11,32 +11,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table" id="dataTable2">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No Telp</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pelanggan as $p)
-                        <tr>
-                            <td>
-                                {{ $i = (isset($i)?++$i:$i=1) }}
-                            </td>
-                            <td>{{ $p->nama }}</td>
-                            <td>{{ $p->alamat }}</td>
-                            <td>{{ $p->no_telp }}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary pilihPelangganBtn" data-id="{{ $p->id }}" data-nama="{{ $p->nama }}"><i data-feather="plus"></i></button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table" id="dataTable2">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>No Telp</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pelanggan as $p)
+                            <tr>
+                                <td>
+                                    {{ $i = (isset($i)?++$i:$i=1) }}
+                                </td>
+                                <td>{{ $p->nama }}</td>
+                                <td>{{ $p->alamat }}</td>
+                                <td>{{ $p->no_telp }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary pilihPelangganBtn" data-id="{{ $p->id }}" data-nama="{{ $p->nama }}"><i data-feather="plus"></i></button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -34,4 +34,18 @@ class StorePenjualanRequest extends FormRequest
             'sub_total' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'no_faktur.required' => 'Nomor faktur belum diisi!',
+            'tgl_faktur.required' => 'Tanggal faktur belum diisi!',
+            'total_bayar.required' => 'Total belum diisi!',
+            'pelanggan_id.required' => 'Pelanggan belum diisi!',
+            'barang_id.required' => 'Barang belum diisi!',
+            'harga_jual.required' => 'Harga jual belum diisi!',
+            'jumlah.required' => 'Jumlah belum diisi!',
+            'sub_total.required' => 'Sub total belum diisi!',
+        ];
+    }
 }

@@ -182,6 +182,13 @@
             </a>
           </li>
 
+          <li class="sidebar-item {{ request()->is('*data_karyawan*') ? 'active' : '' }}">
+            <a href="{{ url('data_karyawan') }}" class="sidebar-link">
+              <i class="fa-solid fa-user"></i>
+              <span>Simulasi Data Karyawan</span>
+            </a>
+          </li>
+
           <li class="sidebar-item {{ request()->is('*logout*') ? 'active' : '' }}">
             <form action="logout" method="POST" id="logout">
               @csrf

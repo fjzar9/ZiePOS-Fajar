@@ -11,7 +11,7 @@ class DetailPenjualan extends Model
 
     protected $table = 'detail_penjualan';
 
-    protected $fillable = ['penjualan_id', 'barang_id', 'harga_jual', 'jumlah', 'sub_total'];
+    protected $fillable = ['penjualan_id', 'barang_id', 'harga_jual', 'jumlah', 'sub_total', 'tgl_faktur'];
 
     public function barang()
     {

@@ -18,12 +18,23 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|max:100',
-            'username' => 'required|min:3|max:50|unique:users',
-            'email' => 'required|email:dns',
-            'no_telp' => 'required|max:20',
-            'alamat' => 'required|max:100',
-            'password' => 'required|min:5|max:50'
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|email:dns|unique:users',
+            'no_telp' => 'required|unique:users',
+            'alamat' => 'required',
+            'password' => 'required'
+        ],
+        [
+            'name.required' => 'Nama lengkap belum diisi!',
+            'username.required' => 'Username belum diisi!',
+            'username.unique' => 'Username sudah ada!',
+            'email.required' => 'Email belum diisi!',
+            'email.unique' => 'Email sudah ada!',
+            'alamat.required' => 'Alamat belum diisi!',
+            'no_telp.required' => 'No telp belum diisi!',
+            'no_telp.unique' => 'No telp sudah ada!',
+            'password.required' => 'Password belum diisi!',
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -31,11 +42,5 @@ class RegisterController extends Controller
         User::create($validatedData);
 
         return redirect('login')->with('success', 'Registrasi berhasil!');
-    }
-
-    public function update($request, User $user)
-    {
-        $user->update($request->all());
-        return redirect('profile')->with('success', 'Data satuan berhasil diupdate!');
     }
 }

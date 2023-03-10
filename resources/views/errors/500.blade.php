@@ -21,9 +21,7 @@
               The website is currently unaivailable. Try again later or contact
               the developer.
             </p>
-            <a href="{{ url('/') }}" class="btn btn-lg btn-outline-primary mt-3">
-              Go Home
-              </a>
+            @if(auth()->user()->role == 'Owner')
           </div>
         </div>
       </div>

@@ -40,8 +40,7 @@ class PenjualanController extends Controller
             $tanggal_awal = Carbon::today()->toDateString();
             $tanggal_akhir = Carbon::today()->toDateString();
             $data['dataPenjualan'] = Penjualan::latest()->whereBetween('tgl_faktur',[$tanggal_awal, $tanggal_akhir])->get();
-        }
-            return view('penjualan.data', [
+        } return view('penjualan.data', [
                 "title" => "Detail Penjualan",
                 "tanggal_awal" => $tanggal_awal,
                 "tanggal_akhir" => $tanggal_akhir
@@ -50,6 +49,7 @@ class PenjualanController extends Controller
 
     public function printPenjualan($id){
         $data['printPenjualan'] = Penjualan::find($id);
+        $data['detailBarang'] = DetailPenjualan::where('penjualan_id', $id)->get();
         return view('penjualan.print', [
             "title" => "Nota Penjualan"
         ])->with($data);
@@ -87,6 +87,7 @@ class PenjualanController extends Controller
         $harga_jual = $request->harga_jual;
         $jumlah = $request->jumlah;
         $sub_total = $request->sub_total;
+        $tgl_faktur = $request->tgl_faktur;
 
         foreach($barang_id as $i => $v){
             $data2['penjualan_id'] = $input_penjualan->id;
@@ -94,8 +95,12 @@ class PenjualanController extends Controller
             $data2['harga_jual'] = $harga_jual[$i];
             $data2['jumlah'] = $jumlah[$i];
             $data2['sub_total'] = $sub_total[$i];
+            $data2['tgl_faktur'] = $tgl_faktur;
             $input_detail_penjualan = DetailPenjualan::create($data2);
 
+            $barangUpdate = Barang::find($data2['barang_id']);
+            $barangUpdate->stok -= $data2['jumlah'];
+            $barangUpdate->update();
         }
         return redirect('dataPenjualan')->with('success','Input penjualan berhasil!');
     }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->double('harga_beli');
             $table->integer('jumlah');
             $table->double('sub_total');
+            $table->date('tanggal_masuk');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });

@@ -56,26 +56,18 @@
   @endif
 
   @if($errors->any())
+    @foreach ($errors->all() as $error)
       Toastify({
-            text: `@foreach ($errors->all() as $error) {{ $error }} @endforeach`,
-            duration: 3000,
-            close: true,
-            gravity: "bottom",
-            position: "right",
-            backgroundColor: "#f3616d",
-          }).showToast()
+              text: "{{ $error }}",
+              duration: 3000,
+              close: true,
+              gravity: "bottom",
+              position: "right",
+              backgroundColor: "#f3616d",
+      }).showToast()
+    @endforeach
   @endif
-
-  // @if($errors->has('loginError'))
-  //     Toastify({
-  //           text: `{{ session('loginError') }}`,
-  //           duration: 3000,
-  //           close: true,
-  //           gravity: "bottom",
-  //           position: "right",
-  //           backgroundColor: "#f3616d",
-  //         }).showToast()
-  // @endif
+  
 </script>
 
 @stack('scripts')

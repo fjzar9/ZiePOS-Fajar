@@ -45,12 +45,13 @@ class PembelianController extends Controller
                 "tanggal_awal" => $tanggal_awal,
                 "tanggal_akhir" => $tanggal_akhir
         ])->with($data);
-
     }
 
     public function printPembelian($id)
     {
+        
         $data['printPembelian'] = Pembelian::find($id);
+        $data['detailBarang'] = DetailPembelian::where('pembelian_id', $id)->get();
         return view('pembelian.print', [
             "title" => "Nota Pembelian"
         ])->with($data);
@@ -88,6 +89,8 @@ class PembelianController extends Controller
         $harga_beli = $request->harga_beli;
         $jumlah = $request->jumlah;
         $sub_total = $request->sub_total;
+        $tanggal_masuk = $request->tanggal_masuk;
+
         
         foreach($barang_id as $i => $v){
             $data2['pembelian_id'] = $input_pembelian->id;
@@ -95,7 +98,12 @@ class PembelianController extends Controller
             $data2['harga_beli'] = $harga_beli[$i];
             $data2['jumlah'] = $jumlah[$i];
             $data2['sub_total'] = $sub_total[$i];
+            $data2['tanggal_masuk'] = $tanggal_masuk;
             $input_detail_pembelian = DetailPembelian::create($data2);
+
+            $barangUpdate = Barang::find($data2['barang_id']);
+            $barangUpdate->stok += $data2['jumlah'];
+            $barangUpdate->update();
         }
         return redirect('dataPembelian')->with('success','Input pembelian berhasil!');
     }
